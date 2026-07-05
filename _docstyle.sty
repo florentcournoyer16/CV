@@ -46,23 +46,34 @@
 % -----------------------------------------------------------------
 % Geométrie
 % -----------------------------------------------------------------
-\RequirePackage[letterpaper,margin=25mm]{geometry}
+\RequirePackage[
+    letterpaper,
+    left=16mm,
+    right=16mm,
+    top=16mm,
+    bottom=18mm
+]{geometry}
 
 % -----------------------------------------------------------------
 % Couleurs et dimensions
 % -----------------------------------------------------------------
-\RequirePackage[table,xcdraw]{xcolor}           % Couleurs, y compris dans les tableaux
-\RequirePackage{multirow}                       % Utilisation de plusieurs rangé dans les tableaux
+\RequirePackage[table]{xcolor}           % Couleurs, y compris dans les tableaux
+\RequirePackage{multirow}                % Utilisation de plusieurs rangé dans les tableaux
 \definecolor{cvblue}{HTML}{003366}
 \definecolor{cvgreen}{HTML}{20b320}
 \definecolor{cvlightgray}{HTML}{8e8e8e}
 \definecolor{cvdarkgray}{HTML}{1d1d1d}
+
 \newcommand{\padding}{5mm}
-\newcommand{\firstcolwidth}{24mm}
+\newcommand{\firstcolwidth}{20mm}
 \newcommand{\scholarshipthirdcolwidth}{15mm}
 \newcommand{\formationthirdcolwidth}{15mm}
-\newcommand{\publicationthirdcolwidth}{15mm}
+\newcommand{\publicationthirdcolwidth}{25mm}
 \newcommand{\skillsecondcolwidth}{60mm}
+
+\RequirePackage{array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 
 % -----------------------------------------------------------------
 % Autres
@@ -126,7 +137,7 @@
 % #1 = Titre de la section
 % -----------------------------------------------------------------
 \newcommand{\cvsection}[1]{
-    \vspace{12pt}
+    \vspace{6pt}
     \noindent
     \makebox[\textwidth][l]{
         \hbox{\textcolor{cvgreen}{\raisebox{1mm}{\rule{\firstcolwidth}{1.5mm}}}}\hspace{2mm}
@@ -148,10 +159,11 @@
 % -----------------------------------------------------------------
 \newcommand{\cveducation}[5]{
     \noindent
-    \begin{tabular*}{\textwidth}{@{}p{\firstcolwidth}@{\extracolsep{\padding}}p{\dimexpr\textwidth-\firstcolwidth-\padding-\padding}@{}}
-        \multirow[t]{2}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2, }\textcolor{cvdarkgray}{\itshape\normalsize #3} \cr
+    \begin{tabular*}{\textwidth}{@{}R{\firstcolwidth}@{\extracolsep{\padding}}L{\dimexpr\textwidth-\firstcolwidth-\padding}@{}}
+        \multirow[t]{2}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2} \textcolor{cvdarkgray}{ -- \normalsize\itshape #3} \cr
         & \textcolor{cvdarkgray}{\normalsize #4 -- \normalsize #5} \cr
     \end{tabular*}
+    \par
 }
 
 % -----------------------------------------------------------------
@@ -165,11 +177,12 @@
 % -----------------------------------------------------------------
 \newcommand{\cvscholarship}[6]{
     \noindent
-    \begin{tabular*}{\textwidth}{@{}p{\firstcolwidth}@{\extracolsep{\padding}}p{\dimexpr\textwidth-\firstcolwidth-\padding-\scholarshipthirdcolwidth-\padding-\padding\relax}@{}p{\scholarshipthirdcolwidth}@{}}
+    \begin{tabular*}{\textwidth}{@{}R{\firstcolwidth}@{\extracolsep{\padding}}L{\dimexpr\textwidth-\firstcolwidth-\padding-\scholarshipthirdcolwidth-\padding\relax}@{}R{\scholarshipthirdcolwidth}@{}}
         \multirow[t]{2}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2} & \multirow[t]{2}{=}{\raggedleft\textcolor{cvdarkgray}{\small #3}} \cr
         & \textcolor{cvdarkgray}{\normalsize #4 -- \normalsize\itshape #5} & \cr
         & \textcolor{cvdarkgray}{\small #6} & \cr
     \end{tabular*}
+    \par
 }
 
 % -----------------------------------------------------------------
@@ -182,10 +195,11 @@
 % -----------------------------------------------------------------
 \newcommand{\cvdistinction}[5]{
     \noindent
-    \begin{tabular*}{\textwidth}{@{}p{\firstcolwidth}@{\extracolsep{\padding}}p{\dimexpr\textwidth-\firstcolwidth-\padding-\padding\relax}@{}}
+    \begin{tabular*}{\textwidth}{@{}R{\firstcolwidth}@{\extracolsep{\padding}}L{\dimexpr\textwidth-\firstcolwidth-\padding\relax}@{}}
         \multirow[t]{2}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2, }\textcolor{cvdarkgray}{\normalsize #3 -- \normalsize\itshape #4} \cr
         & \textcolor{cvdarkgray}{\small #5} \cr
     \end{tabular*}
+    \par
 }
 
 % -----------------------------------------------------------------
@@ -199,12 +213,13 @@
 % -----------------------------------------------------------------
 \newcommand{\cvexperience}[6]{
     \noindent
-    \begin{tabular*}{\textwidth}{@{}p{\firstcolwidth}@{\extracolsep{\padding}}p{\dimexpr\textwidth-\firstcolwidth-\padding-\padding\relax}@{}}
+    \begin{tabular*}{\textwidth}{@{}R{\firstcolwidth}@{\extracolsep{\padding}}L{\dimexpr\textwidth-\firstcolwidth-\padding-\padding\relax}@{}}
         \multirow[t]{3}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2} \cr
         & \textcolor{cvdarkgray}{\normalsize #3 -- \normalsize\itshape #4} \cr
         & \textcolor{cvdarkgray}{\small #5} \cr
         & \textcolor{cvdarkgray}{\small #6} \cr
     \end{tabular*}
+    \par
 }
 
 % -----------------------------------------------------------------
@@ -218,8 +233,8 @@
 % -----------------------------------------------------------------
 \newcommand{\cvformation}[6]{
     \noindent
-    \begin{tabular*}{\textwidth}{@{}p{\firstcolwidth}@{\extracolsep{\padding}}p{\dimexpr\textwidth-\firstcolwidth-\padding-\formationthirdcolwidth-\padding-\padding\relax}@{}p{\formationthirdcolwidth}@{}}
-        \multirow[t]{2}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2} & \raggedleft\textcolor{cvdarkgray}{\small \makebox[\padding][l]{#3}} \cr
+    \begin{tabular*}{\textwidth}{@{}R{\firstcolwidth}@{\extracolsep{\padding}}L{\dimexpr\textwidth-\firstcolwidth-\padding-\formationthirdcolwidth-\padding\relax}@{}R{\formationthirdcolwidth}@{}}
+        \multirow[t]{2}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2} & \textcolor{cvdarkgray}{\small \makebox[\padding][l]{#3}} \cr
         & \textcolor{cvdarkgray}{\small #4, \small #5 -- \small\itshape #6} & \cr
     \end{tabular*}
 }
@@ -236,7 +251,7 @@
 % -----------------------------------------------------------------
 \newcommand{\cvpublication}[7]{
     \noindent
-    \begin{tabular*}{\textwidth}{@{}p{\firstcolwidth}@{\extracolsep{\padding}}p{\dimexpr\textwidth-\firstcolwidth-\padding-\publicationthirdcolwidth-\padding-\padding\relax}@{}p{\publicationthirdcolwidth}@{}}
+    \begin{tabular*}{\textwidth}{@{}R{\firstcolwidth}@{\extracolsep{\padding}}L{\dimexpr\textwidth-\firstcolwidth-\padding-\publicationthirdcolwidth-\padding\relax}@{\extracolsep{\padding}}R{\publicationthirdcolwidth}@{}}
         \multirow[t]{3}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries\normalsize #2} & \raggedleft\textcolor{cvdarkgray}{\small #3} \cr
         & \textcolor{cvdarkgray}{\normalsize #4}, \textcolor{cvdarkgray}{\normalsize #5} -- \textcolor{cvdarkgray}{\itshape\normalsize #6} \cr
         & \textcolor{cvdarkgray}{\small #7} & \cr
@@ -278,20 +293,22 @@
 % En-tête de la matrice de compétences
 \newcommand{\cvskillheader}[0]{
     \noindent
-    \begin{tabular*}{\textwidth}{@{}p{\firstcolwidth}@{\extracolsep{\padding}}p{\skillsecondcolwidth}@{}p{\dimexpr\textwidth-\firstcolwidth-\padding-\skillsecondcolwidth-\padding-\padding\relax}@{}}
+    \begin{tabular*}{\textwidth}{@{}R{\firstcolwidth}@{\extracolsep{\padding}}L{\skillsecondcolwidth}@{}L{\dimexpr\textwidth-\firstcolwidth-\padding-\skillsecondcolwidth-\padding\relax}@{}}
         \raggedleft\textcolor{cvdarkgray}{\bfseries\normalsize Niveau} &
         \textcolor{cvdarkgray}{\bfseries\normalsize Compétence} &
         \centering \textcolor{cvdarkgray}{\bfseries\normalsize Outils / Plateformes} \cr
     \end{tabular*}
     \vspace{-0.5em}
+    \par
     \cvskillseparator
 }
 
 % Commande cvskill
 \newcommand{\cvskill}[4]{
     \noindent
-    \begin{tabular*}{\textwidth}{@{}p{\firstcolwidth}@{\extracolsep{\padding}}p{\skillsecondcolwidth}@{}p{\dimexpr\textwidth-\firstcolwidth-\padding-\skillsecondcolwidth-\padding-\padding\relax}@{}}
+    \begin{tabular*}{\textwidth}{@{}R{\firstcolwidth}@{\extracolsep{\padding}}L{\skillsecondcolwidth}@{}p{\dimexpr\textwidth-\firstcolwidth-\padding-\skillsecondcolwidth-\padding\relax}@{}}
         \raggedleft\cvskillbar{#1} & \textcolor{cvdarkgray}{\bfseries\normalsize #2} \newline{} \textcolor{cvdarkgray}{\normalsize #3}& \textcolor{cvdarkgray}{\small #4} \cr
     \end{tabular*}
+    \par\vspace{6pt}
     \cvskillseparator
 }
