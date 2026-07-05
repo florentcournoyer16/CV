@@ -1,0 +1,297 @@
+% -----------------------------------------------------------------
+% docstyle.sty
+% -----------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{_docstyle}
+
+% -----------------------------------------------------------------
+% Language
+% -----------------------------------------------------------------
+\RequirePackage[french]{babel}      % Traduction des éléments en français (titres, date, etc.)
+
+% -----------------------------------------------------------------
+% Encodage
+% -----------------------------------------------------------------
+\RequirePackage[utf8]{inputenc}     % Adapte automatiquement les règles typographiques au français
+\RequirePackage[T1]{fontenc}        % Meilleure gestion des caractères accentués
+
+% -----------------------------------------------------------------
+% Police et typographie
+% -----------------------------------------------------------------
+\RequirePackage{lmodern}           % Remplace les polices bitmap par des vectorielles
+
+% -----------------------------------------------------------------
+% Listes et énumérations
+% -----------------------------------------------------------------
+\RequirePackage{enumitem}
+\RequirePackage{tikz}
+\newcommand{\cvbullet}{\tikz[baseline=-0.6ex]{\fill[cvgreen] (0,0) circle (0.5ex);}} % Crée une petite pastille verte
+\newcommand{\cvemptybullet}{\tikz[baseline=-0.6ex]{\draw[cvgreen, line width=0.5pt] (0,0) circle (0.5ex);}} % Crée une petite pastille verte vide
+\setlist[itemize]{ % Enlève l'espacement pour les listes
+    partopsep=0pt,
+    parsep=0pt,
+    itemsep=0pt,
+    topsep=0pt,
+    label=\cvemptybullet,   % Insère la petite pastille verte vide dans itemize
+    left=0em
+}
+\setlist[enumerate]{ % Enlève l'espacement pour les listes
+    partopsep=0pt,
+    parsep=0pt,
+    itemsep=0pt,
+    topsep=0pt,
+    left=0em
+}
+
+% -----------------------------------------------------------------
+% Geométrie
+% -----------------------------------------------------------------
+\RequirePackage[a4paper,margin=20mm]{geometry}
+
+% -----------------------------------------------------------------
+% Couleurs et dimensions
+% -----------------------------------------------------------------
+\RequirePackage[table,xcdraw]{xcolor}           % Couleurs, y compris dans les tableaux
+\RequirePackage{multirow}                       % Utilisation de plusieurs rangé dans les tableaux
+\definecolor{cvblue}{HTML}{003366}
+\definecolor{cvgreen}{HTML}{20b320}
+\definecolor{cvlightgray}{HTML}{8e8e8e}
+\definecolor{cvdarkgray}{HTML}{1d1d1d}
+\newcommand{\padding}{5mm}
+\newcommand{\firstcolwidth}{24mm}
+\newcommand{\scholarshipthirdcolwidth}{15mm}
+\newcommand{\formationthirdcolwidth}{15mm}
+\newcommand{\publicationthirdcolwidth}{15mm}
+\newcommand{\skillsecondcolwidth}{60mm}
+
+% -----------------------------------------------------------------
+% Autres
+% -----------------------------------------------------------------
+\RequirePackage[hidelinks]{hyperref}    % Liens cliquable
+\RequirePackage{fontawesome5}           % Icones
+\RequirePackage{tikz}                   % Création de graphiques vectoriels, zones colorées, flèches, encadrés, etc.
+
+% -----------------------------------------------------------------
+% Numéros de page
+% -----------------------------------------------------------------
+\RequirePackage{fancyhdr}           % Personnalisation des en-têtes / pieds de page
+\RequirePackage{lastpage}           % Permet de référencer la dernière page
+
+\fancypagestyle{docstylepagestyle}{
+    \fancyhf{}                                          % Réinitialise les en-têtes et pieds
+    \renewcommand{\headrulewidth}{0pt}                  % Pas de ligne en haut
+    \renewcommand{\footrulewidth}{0pt}                  % Pas de ligne en bas
+    \fancyfoot[C]{\small \textcolor{cvlightgray}{Page \thepage\ de \pageref{LastPage}}} % Texte centré en pied
+}
+
+% -----------------------------------------------------------------
+% Section d'entête
+% #1 = Nom
+% #2 = Rôle
+% #3 = Courriel
+% #4 = Numéro de téléphone
+% #5 = Adresse
+% #6 = Compte GitHub
+% #7 = Compte LinkedIn
+% -----------------------------------------------------------------
+\newcommand{\cvheader}[7]{
+    \vspace{-6pt}
+    \begin{center}
+        % Nom en vert
+        {\huge\bfseries\textcolor{cvgreen}{#1}}
+        \hspace{0.5em}
+        % Barre verticale gris pâle
+        {\color{cvlightgray}\raisebox{-4pt}{\rule{0.4mm}{24pt}}}
+        \hspace{0.5em}
+        % Titre en gris pâle, taille plus petite et aligné verticalement
+        {\color{cvlightgray}\Large #2}
+    \end{center}
+    \vspace{-12pt}
+    \begin{center}
+        {
+        \color{cvlightgray}\small
+        \faEnvelope\enspace\href{mailto:#1}{#3} \quad
+        \faPhone\enspace #4 \quad
+        \faMapMarker*\enspace #5 \quad
+        \faGithub\enspace\href{https://github.com/#6}{#6} \quad
+        \faLinkedin\enspace\href{https://linkedin.com/in/#7}{#7}
+        }
+    \end{center}
+    \vspace{-6pt}
+}
+
+
+% -----------------------------------------------------------------
+% Section avec une ligne verticale verte à gauche
+% #1 = Titre de la section
+% -----------------------------------------------------------------
+\newcommand{\cvsection}[1]{
+    \vspace{12pt}
+    \noindent
+    \makebox[\textwidth][l]{
+        \hbox{\textcolor{cvgreen}{\raisebox{1mm}{\rule{\firstcolwidth}{1.5mm}}}}\hspace{2mm}
+        \textcolor{cvgreen}{\Large #1}
+        \hspace{2mm}
+        \leaders\hbox{\textcolor{cvgreen}{\raisebox{1mm}{\rule{1pt}{1.5mm}}}}\hfill
+    }
+    \par\vspace{6pt}
+}
+
+
+% -----------------------------------------------------------------
+% Commande pour une entrée de formation académique
+% #1 = Dates
+% #2 = Titre de la formation
+% #3 = Nom de l'institution
+% #4 = Lieu
+% #5 = Nom du programme
+% -----------------------------------------------------------------
+\newcommand{\cveducation}[5]{
+    \noindent
+    \begin{tabular*}{\textwidth}{@{}p{\firstcolwidth}@{\extracolsep{\padding}}p{\dimexpr\textwidth-\firstcolwidth-\padding-\padding}@{}}
+        \multirow[t]{2}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2, }\textcolor{cvdarkgray}{\itshape\normalsize #3} \cr
+        & \textcolor{cvdarkgray}{\normalsize #4 -- \normalsize #5} \cr
+    \end{tabular*}
+}
+
+% -----------------------------------------------------------------
+% Commande pour une entrée de bourse
+% #1 = Date
+% #2 = Nom de la bourse
+% #3 = Montant
+% #4 = Institution
+% #5 = Lieu
+% #6 = Description
+% -----------------------------------------------------------------
+\newcommand{\cvscholarship}[6]{
+    \noindent
+    \begin{tabular*}{\textwidth}{@{}p{\firstcolwidth}@{\extracolsep{\padding}}p{\dimexpr\textwidth-\firstcolwidth-\padding-\scholarshipthirdcolwidth-\padding-\padding\relax}@{}p{\scholarshipthirdcolwidth}@{}}
+        \multirow[t]{2}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2} & \multirow[t]{2}{=}{\raggedleft\textcolor{cvdarkgray}{\small #3}} \cr
+        & \textcolor{cvdarkgray}{\normalsize #4 -- \normalsize\itshape #5} & \cr
+        & \textcolor{cvdarkgray}{\small #6} & \cr
+    \end{tabular*}
+}
+
+% -----------------------------------------------------------------
+% Commande pour une entrée de distinction
+% #1 = Date
+% #2 = Nom de la bourse
+% #3 = Institution
+% #4 = Lieu
+% #5 = Description
+% -----------------------------------------------------------------
+\newcommand{\cvdistinction}[5]{
+    \noindent
+    \begin{tabular*}{\textwidth}{@{}p{\firstcolwidth}@{\extracolsep{\padding}}p{\dimexpr\textwidth-\firstcolwidth-\padding-\padding\relax}@{}}
+        \multirow[t]{2}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2, }\textcolor{cvdarkgray}{\normalsize #3 -- \normalsize\itshape #4} \cr
+        & \textcolor{cvdarkgray}{\small #5} \cr
+    \end{tabular*}
+}
+
+% -----------------------------------------------------------------
+% Commande pour une entrée d'expérience professionnelle
+% #1 = Dates
+% #2 = Titre du poste
+% #3 = Nom de l'entreprise
+% #4 = Lieu
+% #5 = Brève description
+% #6 = Liste des accomplissements (itemize)
+% -----------------------------------------------------------------
+\newcommand{\cvexperience}[6]{
+    \noindent
+    \begin{tabular*}{\textwidth}{@{}p{\firstcolwidth}@{\extracolsep{\padding}}p{\dimexpr\textwidth-\firstcolwidth-\padding-\padding\relax}@{}}
+        \multirow[t]{3}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2} \cr
+        & \textcolor{cvdarkgray}{\normalsize #3 -- \normalsize\itshape #4} \cr
+        & \textcolor{cvdarkgray}{\small #5} \cr
+        & \textcolor{cvdarkgray}{\small #6} \cr
+    \end{tabular*}
+}
+
+% -----------------------------------------------------------------
+% Commande pour un cours ou une formation notable
+% #1 = Date
+% #2 = Nom de la formation
+% #3 = Note obtenu
+% #4 = Description
+% #4 = Institution
+% #5 = Lieu
+% -----------------------------------------------------------------
+\newcommand{\cvformation}[6]{
+    \noindent
+    \begin{tabular*}{\textwidth}{@{}p{\firstcolwidth}@{\extracolsep{\padding}}p{\dimexpr\textwidth-\firstcolwidth-\padding-\formationthirdcolwidth-\padding-\padding\relax}@{}p{\formationthirdcolwidth}@{}}
+        \multirow[t]{2}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2} & \raggedleft\textcolor{cvdarkgray}{\small \makebox[\padding][l]{#3}} \cr
+        & \textcolor{cvdarkgray}{\small #4, \small #5 -- \small\itshape #6} & \cr
+    \end{tabular*}
+}
+
+% -----------------------------------------------------------------
+% Commande pour une communication scientifique
+% #1 = Date
+% #2 = Titre de l’article ou de la présentation
+% #3 = Type (conférence, revue, mémoire, journal, livre, etc.)
+% #4 = Auteur(s)
+% #5 = Nom de la conférence / revue / journal / etc.
+% #6 = Lieu / page(s) / chapitre(s) / volume / etc.
+% #7 = Nature de la contribution au travail
+% -----------------------------------------------------------------
+\newcommand{\cvpublication}[7]{
+    \noindent
+    \begin{tabular*}{\textwidth}{@{}p{\firstcolwidth}@{\extracolsep{\padding}}p{\dimexpr\textwidth-\firstcolwidth-\padding-\publicationthirdcolwidth-\padding-\padding\relax}@{}p{\publicationthirdcolwidth}@{}}
+        \multirow[t]{3}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries\normalsize #2} & \raggedleft\textcolor{cvdarkgray}{\small #3} \cr
+        & \textcolor{cvdarkgray}{\normalsize #4}, \textcolor{cvdarkgray}{\normalsize #5} -- \textcolor{cvdarkgray}{\itshape\normalsize #6} \cr
+        & \textcolor{cvdarkgray}{\small #7} & \cr
+    \end{tabular*}
+}
+
+% -----------------------------------------------------------------
+% Commande pour une compétence
+% #1 = Niveau de compétence (0 à 5)
+% #2 = Catégorie
+% #3 = Description
+% #4 = Outils et platforme (itemize)
+% -----------------------------------------------------------------
+% Ligne pointillée pour séparé les rangés
+\newcommand{\cvskillseparator}{
+    \vspace{-2em}
+    \noindent
+    \begin{center}
+        \begin{tikzpicture}
+            \draw[dotted, thick, cvgreen] (\padding,0) -- (\dimexpr\textwidth-\padding\relax,0);
+        \end{tikzpicture}
+    \end{center}
+    \vspace{-0.5em}
+}
+
+% Barre de compétence sur 5 niveaux
+\newcommand{\cvskillbar}[1]{
+    \begin{tikzpicture}[scale=0.6, baseline]
+        \foreach \i in {1,...,5} {
+            \ifnum\i>#1
+                \fill[gray!20] (\i*0.4,0) rectangle ++(0.3,0.3);
+            \else
+                \fill[cvgreen] (\i*0.4,0) rectangle ++(0.3,0.3);
+            \fi
+        }
+    \end{tikzpicture}
+}
+
+% En-tête de la matrice de compétences
+\newcommand{\cvskillheader}[0]{
+    \noindent
+    \begin{tabular*}{\textwidth}{@{}p{\firstcolwidth}@{\extracolsep{\padding}}p{\skillsecondcolwidth}@{}p{\dimexpr\textwidth-\firstcolwidth-\padding-\skillsecondcolwidth-\padding-\padding\relax}@{}}
+        \raggedleft\textcolor{cvdarkgray}{\bfseries\normalsize Niveau} &
+        \textcolor{cvdarkgray}{\bfseries\normalsize Compétence} &
+        \centering \textcolor{cvdarkgray}{\bfseries\normalsize Outils / Plateformes} \cr
+    \end{tabular*}
+    \vspace{-0.5em}
+    \cvskillseparator
+}
+
+% Commande cvskill
+\newcommand{\cvskill}[4]{
+    \noindent
+    \begin{tabular*}{\textwidth}{@{}p{\firstcolwidth}@{\extracolsep{\padding}}p{\skillsecondcolwidth}@{}p{\dimexpr\textwidth-\firstcolwidth-\padding-\skillsecondcolwidth-\padding-\padding\relax}@{}}
+        \raggedleft\cvskillbar{#1} & \textcolor{cvdarkgray}{\bfseries\normalsize #2} \newline{} \textcolor{cvdarkgray}{\normalsize #3}& \textcolor{cvdarkgray}{\small #4} \cr
+    \end{tabular*}
+    \cvskillseparator
+}
