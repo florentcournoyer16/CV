@@ -18,7 +18,8 @@
 % -----------------------------------------------------------------
 % Police et typographie
 % -----------------------------------------------------------------
-\RequirePackage{lmodern}           % Remplace les polices bitmap par des vectorielles
+\RequirePackage[default,semibold]{sourcesans} % Graisse intermédiaire pour les textes en gras
+\renewcommand{\familydefault}{\sfdefault}
 
 % -----------------------------------------------------------------
 % Listes et énumérations
@@ -30,7 +31,7 @@
 \setlist[itemize]{ % Enlève l'espacement pour les listes
     partopsep=0pt,
     parsep=0pt,
-    itemsep=0pt,
+    itemsep=0.8pt,
     topsep=0pt,
     label=\cvemptybullet,   % Insère la petite pastille verte vide dans itemize
     left=0em
@@ -139,7 +140,7 @@
 % #1 = Titre de la section
 % -----------------------------------------------------------------
 \newcommand{\cvsection}[1]{
-    \vspace{6pt}
+    \vspace{7pt}
     \noindent
     \makebox[\textwidth][l]{
         \hbox{\textcolor{cvgreen}{\raisebox{1mm}{\rule{\firstcolwidth}{1.5mm}}}}\hspace{2mm}
@@ -147,7 +148,7 @@
         \hspace{2mm}
         \leaders\hbox{\textcolor{cvgreen}{\raisebox{1mm}{\rule{1pt}{1.5mm}}}}\hfill
     }
-    \par\vspace{6pt}
+    \par\vspace{7pt}
 }
 
 
