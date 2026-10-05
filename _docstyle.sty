@@ -68,8 +68,10 @@
 \newcommand{\firstcolwidth}{20mm}
 \newcommand{\scholarshipthirdcolwidth}{15mm}
 \newcommand{\formationthirdcolwidth}{15mm}
+\newcommand{\educationthirdcolwidth}{25mm}
 \newcommand{\publicationthirdcolwidth}{25mm}
 \newcommand{\skillsecondcolwidth}{60mm}
+\newcommand{\academicthirdcolwidth}{40mm}
 
 \RequirePackage{array}
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
@@ -152,16 +154,17 @@
 % -----------------------------------------------------------------
 % Commande pour une entrée de formation académique
 % #1 = Dates
-% #2 = Titre de la formation
-% #3 = Nom de l'institution
-% #4 = Lieu
-% #5 = Nom du programme
+% #2 = Nom de l'institution
+% #3 = Lieu
+% #4 = Titre du diplôme
+% #5 = Programme
+% #6 = Cote
 % -----------------------------------------------------------------
-\newcommand{\cveducation}[5]{
+\newcommand{\cveducation}[6]{
     \noindent
-    \begin{tabular*}{\textwidth}{@{}R{\firstcolwidth}@{\extracolsep{\padding}}L{\dimexpr\textwidth-\firstcolwidth-\padding}@{}}
-        \multirow[t]{2}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2} \textcolor{cvdarkgray}{ -- \normalsize\itshape #3} \cr
-        & \textcolor{cvdarkgray}{\normalsize #4 -- \normalsize #5} \cr
+    \begin{tabular*}{\textwidth}{@{}R{\firstcolwidth}@{\extracolsep{\padding}}L{\dimexpr\textwidth-\firstcolwidth-\educationthirdcolwidth-\padding-\padding\relax}@{\extracolsep{\padding}}R{\educationthirdcolwidth}@{}}
+        \multirow[t]{2}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2} \textcolor{cvdarkgray}{ -- \normalsize\itshape #3} & \textcolor{cvdarkgray}{\small #6} \cr
+        & \textcolor{cvdarkgray}{\normalsize #4 -- \normalsize #5} & \cr
     \end{tabular*}
     \par
 }
@@ -218,6 +221,28 @@
         & \textcolor{cvdarkgray}{\normalsize #3 -- \normalsize\itshape #4} \cr
         & \textcolor{cvdarkgray}{\small #5} \cr
         & \textcolor{cvdarkgray}{\small #6} \cr
+    \end{tabular*}
+    \par
+}
+
+% -----------------------------------------------------------------
+% Commande pour une expérience académique
+% #1 = Dates
+% #2 = Sigle du cours
+% #3 = Nom du cours
+% #4 = Rôle
+% #5 = Institution
+% #6 = Lieu
+% #7 = Brève description
+% #8 = Liste des accomplissements (itemize)
+% -----------------------------------------------------------------
+\newcommand{\cvexpacad}[8]{
+    \noindent
+    \begin{tabular*}{\textwidth}{@{}R{\firstcolwidth}@{\extracolsep{\padding}}L{\dimexpr\textwidth-\firstcolwidth-\academicthirdcolwidth-\padding-\padding\relax}@{\extracolsep{\padding}}R{\academicthirdcolwidth}@{}}
+        \multirow[t]{3}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2} & \multirow[t]{3}{=}{\raggedleft\textcolor{cvdarkgray}{\bfseries \small #3 \\ \mdseries #4}} \cr
+        & \textcolor{cvdarkgray}{\normalsize #5 -- \normalsize\itshape #6} & \cr
+        & \textcolor{cvdarkgray}{\small #7} \cr
+        & \textcolor{cvdarkgray}{\small #8} \cr
     \end{tabular*}
     \par
 }
