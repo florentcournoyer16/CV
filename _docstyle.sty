@@ -170,6 +170,29 @@
     \par
 }
 
+
+% -----------------------------------------------------------------
+% Commande pour du financement à la recherche
+% #1 = Date
+% #2 = Nom de du financement
+% #3 = Montant
+% #4 = Institution
+% #5 = Lieu
+% #6 = Membres de l'équipes
+% #7 = Description
+% -----------------------------------------------------------------
+\newcommand{\cvgrant}[7]{
+    \noindent
+    \begin{tabular*}{\textwidth}{@{}R{\firstcolwidth}@{\extracolsep{\padding}}L{\dimexpr\textwidth-\firstcolwidth-\padding-\scholarshipthirdcolwidth-\padding\relax}@{}R{\scholarshipthirdcolwidth}@{}}
+        \multirow[t]{2}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2} & \multirow[t]{2}{=}{\raggedleft\textcolor{cvdarkgray}{\small #3}} \cr
+        & \textcolor{cvdarkgray}{\normalsize #4 -- \normalsize\itshape #5} & \cr
+        & \textcolor{cvdarkgray}{\normalsize #6} & \cr
+        & \textcolor{cvdarkgray}{\small #7} & \cr
+    \end{tabular*}
+    \par
+}
+
+
 % -----------------------------------------------------------------
 % Commande pour une entrée de bourse
 % #1 = Date
@@ -218,7 +241,7 @@
 \newcommand{\cvexperience}[6]{
     \noindent
     \begin{tabular*}{\textwidth}{@{}R{\firstcolwidth}@{\extracolsep{\padding}}L{\dimexpr\textwidth-\firstcolwidth-\padding-\padding\relax}@{}}
-        \multirow[t]{3}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2} \cr
+        \multirow[t]{4}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2} \cr
         & \textcolor{cvdarkgray}{\normalsize #3 -- \normalsize\itshape #4} \cr
         & \textcolor{cvdarkgray}{\small #5} \cr
         & \textcolor{cvdarkgray}{\small #6} \cr
@@ -240,7 +263,7 @@
 \newcommand{\cvexpacad}[8]{
     \noindent
     \begin{tabular*}{\textwidth}{@{}R{\firstcolwidth}@{\extracolsep{\padding}}L{\dimexpr\textwidth-\firstcolwidth-\academicthirdcolwidth-\padding-\padding\relax}@{\extracolsep{\padding}}R{\academicthirdcolwidth}@{}}
-        \multirow[t]{3}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2} & \multirow[t]{3}{=}{\raggedleft\textcolor{cvdarkgray}{\bfseries \small #3 \\ \mdseries #4}} \cr
+        \multirow[t]{4}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries #2} & \multirow[t]{4}{=}{\raggedleft\textcolor{cvdarkgray}{\bfseries \small #3 \\ \mdseries #4}} \cr
         & \textcolor{cvdarkgray}{\normalsize #5 -- \normalsize\itshape #6} & \cr
         & \textcolor{cvdarkgray}{\small #7} \cr
         & \textcolor{cvdarkgray}{\small #8} \cr
@@ -278,7 +301,7 @@
 \newcommand{\cvpublication}[7]{
     \noindent
     \begin{tabular*}{\textwidth}{@{}R{\firstcolwidth}@{\extracolsep{\padding}}L{\dimexpr\textwidth-\firstcolwidth-\padding-\publicationthirdcolwidth-\padding\relax}@{\extracolsep{\padding}}R{\publicationthirdcolwidth}@{}}
-        \multirow[t]{3}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries\normalsize #2} & \raggedleft\textcolor{cvdarkgray}{\small #3} \cr
+        \multirow[t]{4}{=}{\raggedleft\textcolor{cvdarkgray}{\small #1}} & \textcolor{cvdarkgray}{\bfseries\normalsize #2} & \raggedleft\textcolor{cvdarkgray}{\small #3} \cr
         & \textcolor{cvdarkgray}{\normalsize #4}, \textcolor{cvdarkgray}{\normalsize #5} -- \textcolor{cvdarkgray}{\itshape\normalsize #6} \cr
         & \textcolor{cvdarkgray}{\small #7} & \cr
     \end{tabular*}
