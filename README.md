@@ -3,6 +3,17 @@
 This CV is written in LaTeX. `A_main.tex` is the document to compile; it loads the local `_docstyle.sty` package and the section files (`B_*.tex`, `C_*.tex`, and so on).
 
 
+## LaTeX Tools Used in This Project 
+
+| Tool | What it does |
+| --- | --- |
+| **TeX Live** or **MiKTeX**   | A LaTeX distribution: it installs the compiler and packages needed to build documents. Choose one distribution.                                                                        |
+| **`pdflatex`**               | The compiler that turns `A_main.tex` and its included files into a PDF. It is supplied by the distribution.                                                                            |
+| **`latexmk`**                | A build helper that calls `pdflatex` as needed and checks when source files change. The project's VS Code settings run `latexmk`. TeX Live includes it; MiKTeX offers it as a package. |
+| **VS Code + LaTeX Workshop** | The editor and its LaTeX extension. They use the installed distribution to build and preview the CV.                                                                                   |
+
+`pdflatex` and `latexmk` are commands you run after installing a LaTeX distribution; you do not need to find separate installers for them.
+
 ## Requirements
 
 - A [LaTeX distribution](https://www.latex-project.org/get/) with **`latexmk`** and **`pdflatex`**. TeX Live or MiKTeX works on Windows, MacTeX on macOS, and TeX Live on Linux.
