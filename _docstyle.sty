@@ -212,6 +212,7 @@
     \par
 }
 
+
 % -----------------------------------------------------------------
 % Commande pour une entrée de distinction
 % #1 = Date
@@ -228,6 +229,7 @@
     \end{tabular*}
     \par
 }
+
 
 % -----------------------------------------------------------------
 % Commande pour une entrée d'expérience professionnelle
@@ -248,6 +250,7 @@
     \end{tabular*}
     \par
 }
+
 
 % -----------------------------------------------------------------
 % Commande pour une expérience académique
@@ -271,6 +274,7 @@
     \par
 }
 
+
 % -----------------------------------------------------------------
 % Commande pour un cours ou une formation notable
 % #1 = Date
@@ -287,6 +291,7 @@
         & \textcolor{cvdarkgray}{\small #4, \small #5 -- \small\itshape #6} & \cr
     \end{tabular*}
 }
+
 
 % -----------------------------------------------------------------
 % Commande pour une communication scientifique
@@ -307,6 +312,7 @@
     \end{tabular*}
 }
 
+
 % -----------------------------------------------------------------
 % Commande pour une compétence
 % #1 = Niveau de compétence (0 à 5)
@@ -314,16 +320,26 @@
 % #3 = Description
 % #4 = Outils et plateformes (itemize)
 % -----------------------------------------------------------------
+\newcommand{\cvskill}[4]{
+    \noindent
+    \begin{tabular*}{\textwidth}{@{}R{\firstcolwidth}@{\extracolsep{\padding}}L{\skillsecondcolwidth}@{}p{\dimexpr\textwidth-\firstcolwidth-\padding-\skillsecondcolwidth-\padding\relax}@{}}
+        \raggedleft\cvskillbar{#1} & \textcolor{cvdarkgray}{\bfseries\normalsize #2} \newline{} \textcolor{cvdarkgray}{\small #3}& \textcolor{cvdarkgray}{\small #4} \cr
+    \end{tabular*}
+    \par\vspace{6pt}
+    \cvskillseparator
+}
+
+
 % Ligne pointillée pour séparer les rangées
 \newcommand{\cvskillseparator}{
-    \vspace{-1em}
+    \vspace{-12pt}
     \noindent
     \begin{center}
         \begin{tikzpicture}
             \draw[dotted, thick, cvgreen] (\padding,0) -- (\dimexpr\textwidth-\padding\relax,0);
         \end{tikzpicture}
     \end{center}
-    \vspace{-0.5em}
+    \vspace{-6pt}
 }
 
 % Barre de compétence sur 5 niveaux
@@ -347,17 +363,6 @@
         \textcolor{cvdarkgray}{\bfseries\normalsize Compétence} &
         \centering \textcolor{cvdarkgray}{\bfseries\normalsize Outils / Plateformes} \cr
     \end{tabular*}
-    \vspace{-0.5em}
-    \par
-    \cvskillseparator
-}
-
-% Commande cvskill
-\newcommand{\cvskill}[4]{
-    \noindent
-    \begin{tabular*}{\textwidth}{@{}R{\firstcolwidth}@{\extracolsep{\padding}}L{\skillsecondcolwidth}@{}p{\dimexpr\textwidth-\firstcolwidth-\padding-\skillsecondcolwidth-\padding\relax}@{}}
-        \raggedleft\cvskillbar{#1} & \textcolor{cvdarkgray}{\bfseries\normalsize #2} \newline{} \textcolor{cvdarkgray}{\normalsize #3}& \textcolor{cvdarkgray}{\small #4} \cr
-    \end{tabular*}
-    \par\vspace{6pt}
+    \vspace{-18pt}
     \cvskillseparator
 }
